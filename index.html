@@ -12,37 +12,52 @@
         * { box-sizing: border-box; }
         body { font-family: 'Tajawal', sans-serif; background-color: #f8fafc; color: #1e293b; scroll-behavior: smooth; }
         header { background: #fff; border-top: 4px solid var(--gold); box-shadow: 0 4px 20px rgba(0,0,0,0.05); position: sticky; top: 0; z-index: 50; }
+        
         .search-wrap { background: linear-gradient(135deg, #0f172a 0%, #1a2540 100%); position: relative; border-bottom: 4px solid var(--gold); }
         .search-wrap::after { content: ''; position: absolute; bottom: 0; left: 0; right: 0; height: 3px; background: linear-gradient(90deg, transparent, var(--gold), transparent); }
+        
         .avatar-symbol { width: 140px; height: 140px; border-radius: 50%; border: 4px solid var(--gold); box-shadow: 0 10px 40px rgba(0,0,0,0.4), inset 0 0 20px rgba(0,0,0,0.5); background: linear-gradient(135deg, #1e293b 0%, #0f172a 100%); display: flex; flex-direction: column; align-items: center; justify-content: center; margin: 0 auto 24px auto; position: relative; }
         .avatar-symbol i { font-size: 3.5rem; color: var(--gold-light); text-shadow: 0 4px 15px rgba(180,83,9,0.4); margin-bottom: 4px; }
         .avatar-symbol span { font-size: 11px; font-weight: 900; color: #cbd5e1; letter-spacing: 1px; }
+
         .input-field { background: #fff; border: 2px solid #e2e8f0; padding: 16px 20px; font-family: 'Tajawal', sans-serif; font-size: 15px; color: #1e293b; width: 100%; outline: none; transition: all 0.3s ease; }
         .input-field:focus { border-color: var(--gold); box-shadow: inset 0 0 0 1px var(--gold); }
         .ask-btn { background: var(--gold); color: #fff; font-family: 'Tajawal', sans-serif; font-size: 16px; font-weight: 700; padding: 16px 32px; border: none; cursor: pointer; white-space: nowrap; display: flex; align-items: center; justify-content: center; gap: 10px; transition: all 0.3s ease; }
         .ask-btn:hover { background: #92400e; box-shadow: 0 4px 15px rgba(180,83,9,0.4); }
+        .ask-btn:disabled { opacity: 0.6; cursor: not-allowed; }
+        
         .results-box { background: #fff; border-radius: 12px; border: 1px solid #e2e8f0; border-top: 4px solid var(--gold); box-shadow: 0 15px 50px rgba(0,0,0,0.15); overflow: hidden; }
         .results-header { background: #f8fafc; border-bottom: 1px solid #e2e8f0; padding: 16px 20px; display: flex; justify-content: space-between; align-items: center; }
         .results-content { padding: 24px; max-height: 480px; overflow-y: auto; line-height: 1.9; font-size: 15px; color: #334155; }
+        
         .service-card { background: #fff; border: 1px solid #f1f5f9; border-bottom: 3px solid var(--gold); border-radius: 12px; padding: 24px 20px; transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1); box-shadow: 0 4px 10px rgba(0,0,0,0.03); }
         .service-card:hover { transform: translateY(-5px); box-shadow: 0 15px 35px rgba(0,0,0,0.1); border-color: #cbd5e1; }
+        
         .badge { background: rgba(180,83,9,0.15); color: var(--gold-light); border: 1px solid rgba(180,83,9,0.3); padding: 5px 16px; border-radius: 20px; font-size: 13px; font-weight: 700; letter-spacing: 0.5px; }
+        
         .chat-bubble-user { background: linear-gradient(135deg, var(--gold) 0%, #92400e 100%); color: #fff; border-radius: 16px 16px 4px 16px; padding: 14px 20px; max-width: 85%; margin-right: auto; font-size: 15px; font-weight: 500; box-shadow: 0 6px 15px rgba(180,83,9,0.25); }
-        .chat-bubble-ai { background: #f8fafc; color: #1e293b; border-radius: 16px 16px 16px 4px; padding: 18px 24px; max-width: 95%; margin-left: auto; font-size: 15px; line-height: 1.9; border: 1px solid #e2e8f0; box-shadow: 0 4px 10px rgba(0,0,0,0.02); }
+        .chat-bubble-ai { background: #f8fafc; color: #1e293b; border-radius: 16px 16px 16px 4px; padding: 18px 24px; max-width: 95%; margin-left: auto; font-size: 15px; line-height: 1.9; border: 1px solid #e2e8f0; }
         .disclaimer { background: #fefce8; border: 1px solid #fde68a; border-radius: 8px; padding: 14px 18px; font-size: 13px; color: #92400e; margin-top: 20px; display: flex; align-items: flex-start; gap: 10px; font-weight: 500; }
+        
         .comments-section { background-color: #f8fafc; padding: 60px 20px; }
         .comment-box { background: #fff; border: 1px solid #e2e8f0; border-radius: 12px; padding: 20px; margin-bottom: 16px; box-shadow: 0 4px 12px rgba(0,0,0,0.03); transition: border-color 0.3s; }
+        .comment-box:hover { border-color: #cbd5e1; }
         .comment-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px; border-bottom: 1px solid #f1f5f9; padding-bottom: 12px; }
         .comment-author { font-weight: 700; color: #0f172a; display: flex; align-items: center; gap: 10px; }
         .comment-date { font-size: 12px; color: #94a3b8; }
         .comment-text { color: #334155; font-size: 14px; line-height: 1.8; margin-bottom: 14px; }
-        .reply-btn { font-size: 13px; color: var(--gold); background: none; border: none; cursor: pointer; font-weight: 700; display: flex; align-items: center; gap: 6px; padding: 6px 12px; border-radius: 6px; transition: all 0.2s; }
+        .reply-btn { font-size: 13px; color: var(--gold); background: none; border: none; cursor: pointer; font-weight: 700; display: flex; align-items: center; gap: 6px; padding: 6px 12px; border-radius: 6px; }
         .replies-container { margin-right: 24px; margin-top: 16px; border-right: 3px solid #e2e8f0; padding-right: 20px; }
         .reply-box { background: #f8fafc; border-radius: 8px; padding: 16px; margin-bottom: 12px; border: 1px solid #f1f5f9; }
         .admin-badge { background: #0f172a; color: var(--gold); font-size: 11px; padding: 3px 8px; border-radius: 4px; margin-right: 6px; font-weight: bold; }
+        
         .form-input { width: 100%; border: 2px solid #e2e8f0; border-radius: 8px; padding: 14px 16px; font-family: 'Tajawal', sans-serif; margin-bottom: 14px; outline: none; transition: border-color 0.3s; }
         .submit-btn { background: #0f172a; color: #fff; padding: 14px 28px; border-radius: 8px; font-weight: 700; cursor: pointer; border: none; font-family: 'Tajawal', sans-serif; transition: all 0.3s; }
-        .suggestion-btn { font-size: 14px; background: rgba(30, 41, 59, 0.8); border: 1px solid rgba(255,255,255,0.1); color: #e2e8f0; padding: 8px 18px; border-radius: 30px; transition: all 0.3s; cursor: pointer; box-shadow: 0 4px 6px rgba(0,0,0,0.1); }
+        .submit-btn:hover { background: var(--gold); }
+
+        .suggestion-btn { font-size: 14px; background: rgba(30, 41, 59, 0.8); border: 1px solid rgba(255,255,255,0.1); color: #e2e8f0; padding: 8px 18px; border-radius: 30px; transition: all 0.3s; cursor: pointer; }
+        .suggestion-btn:hover { background: var(--gold); color: #fff; border-color: var(--gold); }
+
         @media (max-width: 640px) {
             .search-form { flex-direction: column !important; box-shadow: 0 8px 25px rgba(0,0,0,0.2) !important; border-radius: 12px !important; overflow: hidden; }
             .input-field { border-radius: 12px 12px 0 0 !important; border-bottom: none; border: none; }
@@ -71,5 +86,166 @@
 </header>
 
 <section class="search-wrap py-16 px-4" id="consult">
-    <div class
-  
+    <div class="max-w-4xl mx-auto">
+        <div class="avatar-symbol"><i class="fa-solid fa-scale-balanced"></i><span>مكتب المحاماة</span></div>
+        <div class="text-center mb-10">
+            <span class="badge mb-4 inline-block shadow-sm"><i class="fa-solid fa-gavel ml-1"></i>استشارة قانونية فورية</span>
+            <h2 class="text-3xl md:text-5xl font-black text-white mb-4 leading-tight">تواصل مع الأستاذ محمد ناجي</h2>
+            <p class="text-slate-300 text-lg max-w-2xl mx-auto">اكتب استفسارك وسأقوم بالرد عليك شخصياً وبإيجاز وفقاً للتشريعات العراقية النافذة</p>
+        </div>
+        <div class="flex flex-wrap gap-3 justify-center mb-8">
+            <button type="button" onclick="setQuestion('ما هي عقوبة السرقة في قانون العقوبات العراقي؟')" class="suggestion-btn">عقوبة السرقة</button>
+            <button type="button" onclick="setQuestion('ما هي شروط الطلاق في قانون الأحوال الشخصية العراقي؟')" class="suggestion-btn">شروط الطلاق</button>
+            <button type="button" onclick="setQuestion('كيف يتم تأسيس شركة ذات مسؤولية محدودة في العراق؟')" class="suggestion-btn">تأسيس شركة</button>
+        </div>
+        <div class="search-form flex shadow-2xl bg-white rounded-lg">
+            <input id="search-input" type="text" onkeyup="checkEnter(event)" placeholder="اكتب تفاصيل استشارتك القانونية هنا..." class="input-field flex-1" style="border-radius:8px 0 0 8px; border-left:none;">
+            <button type="button" onclick="performSearch()" id="search-btn" class="ask-btn" style="border-radius:0 8px 8px 0;"><i class="fa-solid fa-paper-plane"></i><span>إرسال الاستشارة</span></button>
+        </div>
+        <div id="results-section" class="mt-10 hidden">
+            <div class="results-box">
+                <div class="results-header">
+                    <div class="flex items-center gap-3">
+                        <div class="w-12 h-12 bg-amber-50 rounded-full flex items-center justify-center border border-amber-200"><i class="fa-solid fa-user-tie text-amber-700 text-xl"></i></div>
+                        <div><span class="font-black text-slate-900 block text-base">رد الأستاذ محمد ناجي</span><span class="text-xs font-bold text-slate-500">استشارة قانونية مبدئية</span></div>
+                    </div>
+                    <button type="button" onclick="closeResults()" class="text-slate-400 hover:text-red-600 transition bg-slate-100 w-10 h-10 rounded-full flex items-center justify-center text-lg"><i class="fa-solid fa-xmark"></i></button>
+                </div>
+                <div class="px-6 pt-6"><div id="user-question-display" class="chat-bubble-user hidden"></div></div>
+                <div id="search-results-content" class="results-content"></div>
+                <div class="px-6 pb-6 bg-slate-50 border-t border-slate-100 mt-4 pt-4">
+                    <div class="disclaimer"><i class="fa-solid fa-triangle-exclamation text-amber-600 mt-1 shrink-0 text-lg"></i><span class="leading-relaxed"><strong>تنويه قانوني:</strong> هذه الاستشارة هي رأي قانوني مبدئي. للاعتماد الرسمي، يرجى التواصل هاتفياً لتحديد موعد.</span></div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section class="py-16 px-4 bg-white border-b border-gray-100">
+    <div class="container mx-auto max-w-5xl">
+        <div class="text-center mb-12">
+            <p class="text-sm font-bold text-amber-700 uppercase tracking-widest mb-2">مجالات التخصص والممارسة</p>
+            <h3 class="text-3xl md:text-4xl font-black text-slate-900">الخدمات القانونية الاحترافية</h3>
+        </div>
+        <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-6">
+            <div class="service-card text-center"><div class="w-16 h-16 mx-auto bg-amber-50 rounded-full flex items-center justify-center mb-5 border border-amber-100"><i class="fa-solid fa-gavel text-amber-700 text-3xl"></i></div><p class="font-bold text-lg text-slate-800">القانون المدني</p><p class="text-sm text-slate-500 mt-2 leading-relaxed">صياغة العقود والمنازعات المالية.</p></div>
+            <div class="service-card text-center"><div class="w-16 h-16 mx-auto bg-amber-50 rounded-full flex items-center justify-center mb-5 border border-amber-100"><i class="fa-solid fa-handcuffs text-amber-700 text-3xl"></i></div><p class="font-bold text-lg text-slate-800">القانون الجزائي</p><p class="text-sm text-slate-500 mt-2 leading-relaxed">الترافع في الجنايات والدفاع أمام المحاكم.</p></div>
+            <div class="service-card text-center"><div class="w-16 h-16 mx-auto bg-amber-50 rounded-full flex items-center justify-center mb-5 border border-amber-100"><i class="fa-solid fa-heart text-amber-700 text-3xl"></i></div><p class="font-bold text-lg text-slate-800">الأحوال الشخصية</p><p class="text-sm text-slate-500 mt-2 leading-relaxed">قضايا الزواج، التفريق، النفقة، والمواريث.</p></div>
+            <div class="service-card text-center"><div class="w-16 h-16 mx-auto bg-amber-50 rounded-full flex items-center justify-center mb-5 border border-amber-100"><i class="fa-solid fa-building text-amber-700 text-3xl"></i></div><p class="font-bold text-lg text-slate-800">قانون الشركات</p><p class="text-sm text-slate-500 mt-2 leading-relaxed">تأسيس الشركات وتخليص أوراقها القانونية.</p></div>
+        </div>
+    </div>
+</section>
+
+<section class="comments-section" id="public-forum">
+    <div class="container mx-auto max-w-4xl">
+        <div class="flex items-center gap-4 mb-10 border-b border-slate-200 pb-6">
+            <div class="w-12 h-12 rounded-lg bg-amber-50 text-amber-700 flex items-center justify-center text-2xl border border-amber-200"><i class="fa-solid fa-comments"></i></div>
+            <div><h3 class="text-2xl md:text-3xl font-black text-slate-900">سجل الزوار والاستفسارات العامة</h3></div>
+        </div>
+        <div class="bg-white p-6 md:p-8 rounded-xl border border-slate-200 shadow-sm mb-10">
+            <h4 class="font-black text-slate-800 mb-5 text-base"><i class="fa-solid fa-pen text-amber-600 mr-2"></i>أضف استفساراً أو تعليقاً جديداً</h4>
+            <input type="text" id="comment-name" class="form-input" placeholder="الاسم الكريم (اختياري)">
+            <textarea id="comment-text" class="form-input" rows="4" placeholder="اكتب رسالتك أو استفسارك هنا بوضوح..."></textarea>
+            <div class="flex justify-end mt-2"><button type="button" onclick="submitComment()" class="submit-btn flex items-center gap-2"><i class="fa-solid fa-paper-plane"></i> نشر التعليق</button></div>
+        </div>
+        <div id="comments-container"></div>
+    </div>
+</section>
+
+<section class="bg-slate-900 py-16 px-4 text-center border-y-4 border-amber-700">
+    <div class="container mx-auto max-w-2xl">
+        <i class="fa-solid fa-book-open-reader text-amber-500 text-5xl mb-5 drop-shadow-lg"></i>
+        <h2 class="text-3xl font-black text-white mb-3">جريدة الوقائع العراقية الرسمية</h2>
+        <p class="text-slate-400 text-base mb-8 leading-relaxed">ابقَ على اطلاع دائم. تصفح أحدث التشريعات والقوانين الصادرة رسمياً من وزارة العدل العراقية.</p>
+        <a href="https://www.moj.gov.iq/iraqmag/" target="_blank" class="inline-flex items-center gap-3 bg-amber-700 text-white text-base font-bold px-8 py-4 rounded-lg hover:bg-amber-600 transition shadow-xl"><span>تصفح الجريدة الرسمية الآن</span><i class="fa-solid fa-arrow-up-right-from-square text-sm"></i></a>
+    </div>
+</section>
+
+<footer class="bg-slate-950 text-slate-400 py-12 text-center text-sm border-t border-slate-800">
+    <div class="w-20 h-20 mx-auto bg-slate-900 rounded-full flex items-center justify-center mb-5 border-2 border-slate-800 shadow-inner"><i class="fa-solid fa-scale-balanced text-amber-700 text-3xl block"></i></div>
+    <p class="mb-1 text-white font-black text-xl tracking-wide">مكتب المحامي محمد ناجي</p>
+    <div class="flex justify-center gap-8 mb-8 mt-6">
+        <a href="tel:07813009156" class="flex flex-col items-center gap-3 text-slate-400 hover:text-amber-500 transition group"><div class="w-12 h-12 rounded-full bg-slate-900 flex items-center justify-center group-hover:bg-amber-900/30 group-hover:scale-110 transition-all"><i class="fa-solid fa-phone text-lg"></i></div><span dir="ltr" class="font-bold tracking-wider">0781 300 9156</span></a>
+        <div class="flex flex-col items-center gap-3 text-slate-400"><div class="w-12 h-12 rounded-full bg-slate-900 flex items-center justify-center"><i class="fa-solid fa-location-dot text-lg"></i></div><span class="font-bold">العراق</span></div>
+    </div>
+    <p class="text-slate-600 mt-6 text-xs font-bold">&copy; 2026 مكتب المحامي محمد ناجي. جميع الحقوق محفوظة.</p>
+</footer>
+
+<script>
+    let conversationHistory = [];
+    function setQuestion(q) { const input = document.getElementById('search-input'); input.value = q; input.focus(); document.getElementById('consult').scrollIntoView({ behavior: 'smooth', block: 'start' }); }
+    function checkEnter(event) { if (event.key === "Enter") performSearch(); }
+    function closeResults() { document.getElementById('results-section').classList.add('hidden'); }
+    function mdToHtml(text) { return text.replace(/\*\*(.*?)\*\*/g, '<strong style="color:#0f172a; font-weight:900;">$1</strong>').replace(/\*(.*?)\*/g, '<em>$1</em>').replace(/\n\n/g, '</p><p style="margin-top:14px;">').replace(/\n/g, '<br>'); }
+
+    async function performSearch() {
+        const inputElement = document.getElementById('search-input');
+        const input = inputElement.value.trim();
+        const resultsSection  = document.getElementById('results-section');
+        const resultsContent  = document.getElementById('search-results-content');
+        const searchBtn       = document.getElementById('search-btn');
+        const userDisplay     = document.getElementById('user-question-display');
+        if (!input) return;
+        resultsSection.classList.remove('hidden');
+        userDisplay.classList.remove('hidden');
+        userDisplay.textContent = input;
+        resultsContent.innerHTML = `<div class="chat-bubble-ai" style="display:flex;align-items:center;gap:14px;"><span style="font-size:15px;color:#64748b;font-weight:bold;">الأستاذ محمد ناجي يكتب الرد الآن...</span></div>`;
+        searchBtn.disabled = true;
+        conversationHistory = [{ role: "user", parts: [{ text: input }] }];
+        try {
+            const response = await fetch("/.netlify/functions/ask", {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify({ contents: conversationHistory })
+            });
+            const data = await response.json();
+            if (response.ok && data.candidates && data.candidates[0].content) {
+                resultsContent.innerHTML = `<div class="chat-bubble-ai"><p>${mdToHtml(data.candidates[0].content.parts[0].text)}</p></div>`;
+            } else {
+                resultsContent.innerHTML = `<div class="chat-bubble-ai text-red-600 font-bold">عذراً، أنا مشغول حالياً، يرجى المحاولة لاحقاً.</div>`;
+            }
+        } catch (error) {
+            resultsContent.innerHTML = `<div class="chat-bubble-ai text-red-600 font-bold">حدث خطأ في الاتصال بالشبكة.</div>`;
+        } finally { searchBtn.disabled = false; inputElement.value = ''; }
+    }
+
+    let commentsData = JSON.parse(localStorage.getItem('naji_lawyer_comments')) || [];
+    function generateId() { return Math.random().toString(36).substr(2, 9); }
+    function getCurrentDate() { return new Date().toLocaleDateString('ar-IQ', { year: 'numeric', month: 'long', day: 'numeric' }); }
+    function renderComments() {
+        const container = document.getElementById('comments-container');
+        if (!container) return;
+        container.innerHTML = '';
+        if(commentsData.length === 0) return;
+        [...commentsData].reverse().forEach(comment => {
+            let html = `<div class="comment-box" id="comment-${comment.id}"><div class="comment-header"><div class="comment-author"><div class="w-10 h-10 rounded-full bg-slate-100 flex items-center justify-center"><i class="fa-solid fa-user"></i></div><span class="text-base">${comment.name}</span></div><div class="comment-date font-bold">${comment.date}</div></div><div class="comment-text">${comment.text}</div><button type="button" class="reply-btn" onclick="document.getElementById('reply-form-${comment.id}').classList.toggle('hidden')"><i class="fa-solid fa-reply"></i> أضف رداً</button><div id="reply-form-${comment.id}" class="hidden mt-4 p-5 bg-slate-50 rounded-xl"><input type="text" id="reply-name-${comment.id}" class="form-input text-sm py-2.5 mb-3" placeholder="اسمك"><textarea id="reply-text-${comment.id}" class="form-input text-sm py-3 mb-3" rows="2" placeholder="اكتب ردك..."></textarea><div class="flex justify-end gap-3"><button type="button" onclick="submitReply('${comment.id}')" class="text-sm bg-amber-700 text-white px-5 py-2 rounded-lg font-bold">إرسال الرد</button></div></div><div class="replies-container">`;
+            if(comment.replies) comment.replies.forEach(reply => {
+                html += `<div class="reply-box"><div class="comment-header" style="border-bottom:none;"><div class="comment-author text-sm">${reply.name}</div><div class="comment-date" style="font-size:11px;">${reply.date}</div></div><div class="comment-text mb-0" style="font-size:13.5px;">${reply.text}</div></div>`;
+            });
+            html += `</div></div>`;
+            container.innerHTML += html;
+        });
+    }
+    function submitComment() {
+        const nameInput = document.getElementById('comment-name').value.trim() || 'زائر كريم';
+        const textInput = document.getElementById('comment-text').value.trim();
+        if (!textInput) return;
+        commentsData.push({ id: generateId(), name: nameInput, text: textInput, date: getCurrentDate(), replies: [] });
+        saveAndRender();
+        document.getElementById('comment-name').value = ''; document.getElementById('comment-text').value = '';
+    }
+    function submitReply(commentId) {
+        const nameInput = document.getElementById(`reply-name-${commentId}`).value.trim() || 'زائر كريم';
+        const textInput = document.getElementById(`reply-text-${commentId}`).value.trim();
+        if (!textInput) return;
+        const commentIndex = commentsData.findIndex(c => c.id === commentId);
+        if (commentIndex !== -1) {
+            commentsData[commentIndex].replies.push({ id: generateId(), name: nameInput, text: textInput, date: getCurrentDate() });
+            saveAndRender();
+        }
+    }
+    function saveAndRender() { localStorage.setItem('naji_lawyer_comments', JSON.stringify(commentsData)); renderComments(); }
+    document.addEventListener('DOMContentLoaded', renderComments);
+</script>
+</body>
+</html>
