@@ -6,10 +6,21 @@ exports.handler = async function(event, context) {
     try {
         const body = JSON.parse(event.body);
         
-        // 1. المفتاح مدمج في الكود حرفياً كما طلبت
-        const API_KEY = "AQ.Ab8RN6JxkaTzofnxDflCkgupK2v5uwccHzxR319rfvfya0Afbw"; 
+        // جلب المفتاح من الخزنة السرية في Netlify
+        const API_KEY = process.env.GEMINI_API_KEY; 
         
-        // 2. المسار الأصلي لنموذج gemini-2.5-flash
+        // فحص إذا كان المفتاح موجوداً في إعدادات Netlify
+        if (!API_KEY) {
+            return {
+                statusCode: 200,
+                headers: { "Content-Type": "application/json", "Access-Control-Allow-Origin": "*" },
+                body: JSON.stringify({
+                    candidates: [ { content: { parts: [ { text: "❌ خطأ: لم يتم العثور على المفتاح السري GEMINI_API_KEY في إعدادات Netlify. يرجى إضافته وعمل Deploy." } ] } } ]
+                })
+            };
+        }
+
+        // المسار الأصلي للنموذج المطلوب
         const ENDPOINT = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent?key=${API_KEY}`;
         
         const systemPrompt = `أنت المحامي العراقي محمد ناجي. تحدث بصيغة المتكلم (أنا) وبشكل شخصي وواثق ومختصر جداً.
@@ -25,14 +36,14 @@ exports.handler = async function(event, context) {
             body: JSON.stringify({
                 system_instruction: { parts: [{ text: systemPrompt }] },
                 contents: body.contents,
-                tools: [{ googleSearch: {} }], 
+                tools: [{ googleSearch: {} }], // ميزة الاتصال بالإنترنت
                 generationConfig: { temperature: 0.1 }
             })
         });
 
         const data = await response.json();
         
-        // كشف الأخطاء لإظهارها على الشاشة في حال وجود أي مشكلة من جوجل
+        // التقاط أخطاء جوجل وإظهارها مباشرة (مثل خطأ المفتاح غير الصالح)
         if (data.error) {
             return {
                 statusCode: 200,
