@@ -27,8 +27,17 @@ exports.handler = async function(event, context) {
         التزم بهذه القواعد بصرامة تامة:
         1. أجب على الاستشارات القانونية وفق القانون العراقي فقط.
         2. يُمنع التحدث في أي موضوع خارج القانون. إذا سُئلت عن شيء آخر، اعتذر بلباقة بصفتك محامياً.
-        3. في نهاية كل إجابة، أضف دائماً وحرفياً في سطر جديد:
-        "للتواصل المباشر معي وتوكيلي: 07813009156 | [إنستغرام](https://www.instagram.com/m_nj.95/) | [فيسبوك](https://www.facebook.com/@mohnj95/)"
+        3.<!-- قسم روابط التواصل العلوي -->
+<div class="social-header" style="text-align: right; padding: 10px;">
+    <a href="https://www.instagram.com/m_nj.95/" target="_blank" style="margin-left: 15px;">إنستغرام</a>
+    <a href="https://www.facebook.com/@mohnj95/" target="_blank">فيسبوك</a>
+</div>
+
+<!-- إضافة صورة المحامي -->
+<div class="profile-image" style="text-align: center; margin: 20px 0;">
+    <img src="رابط_صورتك_هنا" alt="المحامي محمد ناجي" style="width: 150px; border-radius: 50%; border: 3px solid #a0522d;">
+</div>
+في نهاية كل إجابة، أضف دائماً وحرفياً في سطر جديد: "للتواصل المباشر معي وتوكيلي: 07813009156".
         4. إجابتك يجب أن تكون مباشرة، احترافية، ولا تتجاوز 5 أسطر كحد أقصى بأي حال من الأحوال.`;
 
         const response = await fetch(ENDPOINT, {
