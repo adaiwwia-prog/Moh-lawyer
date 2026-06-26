@@ -1,5 +1,4 @@
 exports.handler = async function(event, context) {
-    // السماح فقط بطلبات POST
     if (event.httpMethod !== "POST") {
         return { statusCode: 405, body: "Method Not Allowed" };
     }
@@ -8,18 +7,17 @@ exports.handler = async function(event, context) {
         const body = JSON.parse(event.body);
         const API_KEY = process.env.GEMINI_API_KEY; 
         
-        // 1. فحص وجود المفتاح السري في الخزنة
+        // 1. فحص وجود المفتاح السري
         if (!API_KEY) {
             return {
                 statusCode: 200,
                 headers: { "Content-Type": "application/json", "Access-Control-Allow-Origin": "*" },
                 body: JSON.stringify({
-                    candidates: [{ content: { parts: [{ text: "❌ خطأ: لم يتم العثور على المفتاح السري GEMINI_API_KEY في خزنة Netlify." }] }] }]
+                    candidates: [ { content: { parts: [ { text: "❌ خطأ: لم يتم العثور على المفتاح السري GEMINI_API_KEY في Netlify." } ] } } ]
                 })
             };
         }
 
-        // استخدام الموديل القياسي والمستقر كلياً للربط
         const ENDPOINT = `https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash:generateContent?key=${API_KEY}`;
         
         const systemPrompt = `أنت المحامي العراقي محمد ناجي. تحدث بصيغة المتكلم (أنا) وبشكل شخصي وواثق ومختصر جداً.
@@ -35,21 +33,20 @@ exports.handler = async function(event, context) {
             body: JSON.stringify({
                 system_instruction: { parts: [{ text: systemPrompt }] },
                 contents: body.contents,
-                // الصيغة الرسمية المعتمدة لربط خوادم جوجل بمحرك البحث المباشر
-                tools: [{ googleSearchRetrieval: {} }], 
+                tools: [{ googleSearch: {} }], // ميزة الإنترنت
                 generationConfig: { temperature: 0.1 }
             })
         });
 
         const data = await response.json();
         
-        // 2. كشف وعرض أي خطأ يرجع من سيرفرات جوجل مباشرة على الشاشة
+        // 2. كشف الأخطاء من جوجل
         if (data.error) {
             return {
                 statusCode: 200,
                 headers: { "Content-Type": "application/json", "Access-Control-Allow-Origin": "*" },
                 body: JSON.stringify({
-                    candidates: [{ content: { parts: [{ text: `❌ خطأ رسمي من سيرفر جوجل: ${data.error.message}` }] }] }]
+                    candidates: [ { content: { parts: [ { text: `❌ خطأ رسمي من سيرفر جوجل: ${data.error.message}` } ] } } ]
                 })
             };
         }
@@ -69,7 +66,7 @@ exports.handler = async function(event, context) {
             statusCode: 200, 
             headers: { "Content-Type": "application/json", "Access-Control-Allow-Origin": "*" },
             body: JSON.stringify({
-                candidates: [{ content: { parts: [{ text: `❌ خطأ سيرفر داخلي: ${error.message}` }] }] }]
+                candidates: [ { content: { parts: [ { text: `❌ خطأ داخلي في السيرفر: ${error.message}` } ] } } ]
             })
         };
     }
