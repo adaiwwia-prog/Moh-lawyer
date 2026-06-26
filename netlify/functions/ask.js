@@ -1,4 +1,5 @@
 exports.handler = async function(event, context) {
+    // السماح فقط بطلبات POST
     if (event.httpMethod !== "POST") {
         return { statusCode: 405, body: "Method Not Allowed" };
     }
@@ -7,18 +8,19 @@ exports.handler = async function(event, context) {
         const body = JSON.parse(event.body);
         const API_KEY = process.env.GEMINI_API_KEY; 
         
-        // 1. فحص إذا كان المفتاح مفقوداً في خزنة Netlify
+        // 1. فحص وجود المفتاح السري في الخزنة
         if (!API_KEY) {
             return {
                 statusCode: 200,
                 headers: { "Content-Type": "application/json", "Access-Control-Allow-Origin": "*" },
                 body: JSON.stringify({
-                    candidates: [{ content: { parts: [{ text: "❌ خطأ في الإعدادات: لم يتم العثور على المفتاح السري (GEMINI_API_KEY) في خزنة Netlify. يرجى التأكد من حفظه وعمل Trigger Deploy." }] }]
+                    candidates: [{ content: { parts: [{ text: "❌ خطأ: لم يتم العثور على المفتاح السري GEMINI_API_KEY في خزنة Netlify." }] }] }]
                 })
             };
         }
 
-        const ENDPOINT = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent?key=${API_KEY}`;
+        // استخدام الموديل القياسي والمستقر كلياً للربط
+        const ENDPOINT = `https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash:generateContent?key=${API_KEY}`;
         
         const systemPrompt = `أنت المحامي العراقي محمد ناجي. تحدث بصيغة المتكلم (أنا) وبشكل شخصي وواثق ومختصر جداً.
         التزم بهذه القواعد بصرامة تامة:
@@ -33,20 +35,21 @@ exports.handler = async function(event, context) {
             body: JSON.stringify({
                 system_instruction: { parts: [{ text: systemPrompt }] },
                 contents: body.contents,
-                tools: [{ googleSearch: {} }], // أداة الاتصال بالإنترنت
+                // الصيغة الرسمية المعتمدة لربط خوادم جوجل بمحرك البحث المباشر
+                tools: [{ googleSearchRetrieval: {} }], 
                 generationConfig: { temperature: 0.1 }
             })
         });
 
         const data = await response.json();
         
-        // 2. إذا أرجعت جوجل خطأ، نقوم بتمريره ليظهر على شاشة هاتفك فوراً بدلاً من الرسالة العادية
+        // 2. كشف وعرض أي خطأ يرجع من سيرفرات جوجل مباشرة على الشاشة
         if (data.error) {
             return {
                 statusCode: 200,
                 headers: { "Content-Type": "application/json", "Access-Control-Allow-Origin": "*" },
                 body: JSON.stringify({
-                    candidates: [{ content: { parts: [{ text: `❌ خطأ رسمي من سيرفر جوجل: ${data.error.message} (كود الخطأ: ${data.error.code})` }] }]
+                    candidates: [{ content: { parts: [{ text: `❌ خطأ رسمي من سيرفر جوجل: ${data.error.message}` }] }] }]
                 })
             };
         }
@@ -66,7 +69,7 @@ exports.handler = async function(event, context) {
             statusCode: 200, 
             headers: { "Content-Type": "application/json", "Access-Control-Allow-Origin": "*" },
             body: JSON.stringify({
-                candidates: [{ content: { parts: [{ text: `❌ خطأ داخلي في السيرفر: ${error.message}` }] }]
+                candidates: [{ content: { parts: [{ text: `❌ خطأ سيرفر داخلي: ${error.message}` }] }] }]
             })
         };
     }
