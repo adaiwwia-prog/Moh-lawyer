@@ -5,20 +5,12 @@ exports.handler = async function(event, context) {
     
     try {
         const body = JSON.parse(event.body);
-        const API_KEY = process.env.GEMINI_API_KEY; 
         
-        // 1. فحص وجود المفتاح السري
-        if (!API_KEY) {
-            return {
-                statusCode: 200,
-                headers: { "Content-Type": "application/json", "Access-Control-Allow-Origin": "*" },
-                body: JSON.stringify({
-                    candidates: [ { content: { parts: [ { text: "❌ خطأ: لم يتم العثور على المفتاح السري GEMINI_API_KEY في Netlify." } ] } } ]
-                })
-            };
-        }
-
-        const ENDPOINT = `https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash:generateContent?key=${API_KEY}`;
+        // 1. المفتاح مدمج في الكود حرفياً كما طلبت
+        const API_KEY = "AQ.Ab8RN6JxkaTzofnxDflCkgupK2v5uwccHzxR319rfvfya0Afbw"; 
+        
+        // 2. المسار الأصلي لنموذج gemini-2.5-flash
+        const ENDPOINT = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent?key=${API_KEY}`;
         
         const systemPrompt = `أنت المحامي العراقي محمد ناجي. تحدث بصيغة المتكلم (أنا) وبشكل شخصي وواثق ومختصر جداً.
         التزم بهذه القواعد بصرامة تامة:
@@ -33,14 +25,14 @@ exports.handler = async function(event, context) {
             body: JSON.stringify({
                 system_instruction: { parts: [{ text: systemPrompt }] },
                 contents: body.contents,
-                tools: [{ googleSearch: {} }], // ميزة الإنترنت
+                tools: [{ googleSearch: {} }], 
                 generationConfig: { temperature: 0.1 }
             })
         });
 
         const data = await response.json();
         
-        // 2. كشف الأخطاء من جوجل
+        // كشف الأخطاء لإظهارها على الشاشة في حال وجود أي مشكلة من جوجل
         if (data.error) {
             return {
                 statusCode: 200,
